@@ -1,0 +1,26 @@
+<div class="home-container">
+    <div class="title-section">
+        <div class="logo"></div>
+        <span>eh Tarik Index</span>
+    </div>
+
+    <div class="description">
+        <p>
+            This is a website to calculate the inflation rate within Malaysia by collecting the price of Teh Tarik from
+            different area.
+        </p>
+    </div>
+
+    <div class="form-holder">
+        <form #form="ngForm" [class.show-form-error]="showFormError">
+            <div><span>Enter the amount (RM):</span></div>
+            <div><input type="number" step="0.01" name="price" placeholder="0.00" required></div>
+        </form>
+    </div>
+
+    <div class="btn-holder">
+        <button class="btn-submit" (click)="submit()">
+            <span>Submit</span>
+        </button>
+    </div>
+</div>

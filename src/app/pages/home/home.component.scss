@@ -1,0 +1,105 @@
+@import "../../core/styles/variables.scss";
+
+@media (max-width: $bp-small-devices) {
+    .home-container {
+        .title-section {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: center;
+            height: 5rem;
+            margin-bottom: 2rem;
+            width: 100%;
+
+            .logo {
+                background-image: url("/assets/logo.png");
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 2.5rem;
+                height: 2.5rem;
+                display: block;
+                margin-right: 0.2rem;
+            }
+
+            > span {
+                font-weight: 700;
+                font-size: 1.6rem;
+                font-family: "Cedarville Cursive", cursive;
+                color: var(--primary-brown);
+            }
+        }
+
+        .description {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-holder form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 2rem;
+
+            > div {
+                width: 75%;
+            } 
+
+            span {
+                line-height: 1.8rem;
+                font-weight: 420;
+                font-size: 1.2rem;
+                margin-bottom: 0.3rem;
+                padding-left: 0.5rem;
+                text-align: left;
+                min-width: 235px;
+            }
+
+            input {
+                border-width: 1px;
+                border-radius: 0.3rem;
+                border-color: black;
+                padding: 0.2rem;
+                padding-left: 0.7rem;
+                width: 100%;
+
+                &:focus {
+                    border-color: var(--primary-brown);
+                }
+            }
+        }
+
+        .btn-holder {
+
+            display: flex;
+            justify-content: center;
+
+            .btn-submit {
+                padding: 0.3rem 0.7rem;
+                border: none;
+                outline: none;
+                border-radius: 0.3rem;
+                box-shadow: 0 5px #999;
+                background-color: var(--button-light-brown);
+                color: #ffffff;
+
+                > span {
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+                    font-size: smaller;
+                    font-weight: 500;
+                    word-spacing: 10%;
+                }
+            }
+
+            .btn-submit:hover {
+                background-color: var(--primary-brown);
+            }
+
+            .btn-submit:active {
+                transform: translateY(1px);
+                box-shadow: 0 3px #666;
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.nav-container {
+
+    position: absolute;
+    width: 100%;
+
+    img.navbar-brand {
+        width: 2rem;
+        height: auto;
+    }
+
+    .bg-light {
+        background-color: #f8f5f1 !important;
+    }
+
+    button.navbar-toggler:focus {
+        box-shadow: none !important;
+    }
+}
