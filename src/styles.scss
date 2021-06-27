@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap");
 @import "app/core/styles/variables.scss";
+@import "app/core/styles/button.scss";
 @import "~bootstrap/scss/bootstrap";
 
 :root {
@@ -32,4 +33,24 @@ body {
 :-ms-input-placeholder,
 :-moz-placeholder {
     font-size: small;
+}
+
+.mat-option-text {
+    font-size: 1rem !important;
+    background-color: #ffffff;
+    padding: 0.1rem 0 0.1rem 0.5rem;
+}
+
+@media (max-width: $bp-small-devices) and (min-width: $bp-extra-small-devices) {
+    
+    html {
+        font-size: $base-font-size;
+    }
+}
+
+@media (max-width: $bp-extra-small-devices) {
+    
+    html {
+        font-size: $base-font-size * 0.90;
+    }
 }

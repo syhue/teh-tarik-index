@@ -1,0 +1,7 @@
+.show-form-error {
+    
+    .ng-invalid {
+        border: 2px solid var(--danger) !important;
+        background-color: rgba(240, 45, 67, 0.05) !important;
+    }
+}

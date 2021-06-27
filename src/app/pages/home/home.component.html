@@ -6,21 +6,53 @@
 
     <div class="description">
         <p>
-            This is a website to calculate the inflation rate within Malaysia by collecting the price of Teh Tarik from
+            This website is created for the purpose of calculating the inflation rate within Malaysia by collecting the
+            price of Teh Tarik from
             different area.
+        </p>
+
+        <p *ngIf="!isLoggedIn()">
+            To ensure the accuracy of data, you are required to sign in with your google account. Apologize the
+            incovienient and thank you for taking your time in contributing the data.
         </p>
     </div>
 
-    <div class="form-holder">
+    <div class="form-holder" *ngIf="isLoggedIn()">
         <form #form="ngForm" [class.show-form-error]="showFormError">
-            <div><span>Enter the amount (RM):</span></div>
-            <div><input type="number" step="0.01" name="price" placeholder="0.00" required></div>
+            <div class="form-field">
+                <div><span>Enter the amount (RM):</span></div>
+                <div><input type="number" step="0.01" placeholder="0.00" name="priceTehTarik" [(ngModel)]="priceTehTarik" required>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <div><span>Enter the region: </span></div>
+                <input type="text" placeholder="TBS, Bandar Tasik Selatan" aria-label="Number" matInput [matAutocomplete]="auto" 
+                    name="place" [(ngModel)]="place" (keydown.enter)="getOptions()" required>
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let item of locationInput" [value]="item.name" (onSelectionChange)="coordinates = item.value">
+                        {{ item.name }}
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
         </form>
     </div>
 
-    <div class="btn-holder">
+    <div class="btn-holder" *ngIf="isLoggedIn()">
         <button class="btn-submit" (click)="submit()">
             <span>Submit</span>
         </button>
+    </div>
+
+    <div class="login-section">
+        <cool-google-button color="light" (click)="signIn()" *ngIf="!isLoggedIn()">
+            Login with Google
+        </cool-google-button>
+    </div>
+
+    <div class="logout-section">
+        <cool-google-button color="light" (click)="signOut()" *ngIf="isLoggedIn()">
+            Logout
+        </cool-google-button>
     </div>
 </div>
