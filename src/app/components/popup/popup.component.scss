@@ -1,0 +1,54 @@
+@import "../../core/styles/variables.scss";
+
+@media (max-width: $bp-extra-small-devices) {
+
+    .modal-body {
+        display: block;
+        padding: 0;
+        border: none !important;
+        border-radius: 0.313rem;
+        box-shadow: none !important;
+    }
+
+    .title-section {
+        background-color: #ea9e8d;
+        border-top-left-radius: 0.313rem;
+        border-top-right-radius: 0.313rem;
+        padding-top: 0.7rem;
+        padding-bottom: 0.7rem;
+        color: white;
+        text-align: center;
+        font-weight: 550;
+        font-size: 1.1rem;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .msg-section {
+        padding: 1rem 0.7rem 1rem 0.7rem;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: lightcoral;
+    }
+
+    .button-holder {
+        padding-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+    
+}
+
+@media (max-width: $bp-small-devices) and (min-width: $bp-extra-small-devices) {
+
+    .modal-section {
+        width: 100% !important;
+        background-color: aqua !important;
+
+        .modal-dialog {
+            width: 50% !important;
+            background-color: bisque !important;
+        }
+    }
+    
+
+}

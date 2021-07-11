@@ -10,6 +10,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { HomeComponent } from '../../pages/home/home.component';
 import { MapComponent } from '../../pages/map/map.component';
 import { AdminLayoutRoutes } from './admin-routing.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { AdminLayoutRoutes } from './admin-routing.module';
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
+        MatDialogModule,
         RouterModule.forChild(AdminLayoutRoutes),
     ],
     schemas: [

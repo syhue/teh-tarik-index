@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap");
 @import "app/core/styles/variables.scss";
 @import "app/core/styles/button.scss";
+@import "app/core/styles/modal.scss";
 @import "~bootstrap/scss/bootstrap";
 
 :root {
@@ -39,6 +40,12 @@ body {
     font-size: 1rem !important;
     background-color: #ffffff;
     padding: 0.1rem 0 0.1rem 0.5rem;
+}
+
+.error-msg {
+    color: red;
+    padding-top: 5px;
+    font-size: smaller;
 }
 
 @media (max-width: $bp-small-devices) and (min-width: $bp-extra-small-devices) {

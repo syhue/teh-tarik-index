@@ -10,6 +10,7 @@
                 <div><span>Enter the amount (RM):</span></div>
                 <div><input type="number" step="0.01" placeholder="0.00" name="priceTehTarik" [(ngModel)]="priceTehTarik" required>
                 </div>
+                <div class="error-msg" *ngIf="showFormError && form.controls.priceTehTarik?.errors?.required">Please enter the price of teh tarik.</div>
             </div>
 
             <div class="form-field">
@@ -21,6 +22,7 @@
                         {{ item.name }}
                     </mat-option>
                 </mat-autocomplete>
+                <div class="error-msg" *ngIf="showFormError && form.controls.priceTehTarik?.errors?.required">Please enter the region.</div>
             </div>
         </form>
     </div>

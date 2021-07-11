@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GoogleApiService } from 'ng-gapi';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { PopupServiceService } from '../../components/popup/popup-service.service';
+import { DEFAULT_REQUIRED_MSG } from '../../core/constants';
 import { Coordinates } from '../../core/models/coordinates/coordinates';
 import { Selective } from '../../core/models/options/selective-options';
 import { GeoLocationService } from '../../core/services/geo-location.service';
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
     options!: Selective<Coordinates>[];
     ipAddress!: string;
     coordinates!: Coordinates;
+    errorMsg = DEFAULT_REQUIRED_MSG;
 
     constructor(
         private userService: UserService,
@@ -38,6 +41,7 @@ export class HomeComponent implements OnInit {
         private ipService: IpService,
         private tehTarikDataService: TehTarikDataService,
         private router: Router,
+        private popupService: PopupServiceService
     ) {}
 
     ngOnInit() {
@@ -71,13 +75,20 @@ export class HomeComponent implements OnInit {
     }
 
     submit() {
+        
+        if (this.form.invalid) {
+            this.popupService.alert('Please fill in the required fields.');
+            this.showFormError = true;
+            return;
+        }
+
         const form = {
             price: this.priceTehTarik,
             location: this.coordinates,
             ipAddress: this.ipAddress,
             userId: this.userService.getCurrentUserId()
         }
-        console.log(form);
+
         this.tehTarikDataService.createTehTarik(form).subscribe(data => {
             console.log(data);
             this.router.navigate(['map']);

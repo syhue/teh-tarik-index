@@ -1,0 +1,1 @@
+export const DEFAULT_REQUIRED_MSG = "Please fill in the required fields."

@@ -1,0 +1,16 @@
+
+@media (max-width: $bp-extra-small-devices) {
+
+    .modal {
+        width: 100% !important;
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+}
+
+@media (max-width: $bp-small-devices) and (min-width: $bp-extra-small-devices) {
+    
+    .modal {
+        display: contents !important;
+    }
+}
