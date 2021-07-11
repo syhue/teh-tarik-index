@@ -21,7 +21,7 @@ import { UserService } from '../../core/services/user-service.service';
 })
 export class HomeComponent implements OnInit {
 
-    @ViewChild('form', {static: false, read: NgForm}) form!: NgForm;
+    @ViewChild('form', { static: false, read: NgForm }) form!: NgForm;
     myControl = new FormControl();
     filteredOptions!: Observable<Selective<Coordinates>[]>;
     showFormError = false;
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
         private tehTarikDataService: TehTarikDataService,
         private router: Router,
         private popupService: PopupServiceService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.route.fragment.subscribe();
@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
     }
 
     getOptions() {
-        this.locationInput = [];        
+        this.locationInput = [];
         this.geoLocationService.getLocationByName(this.place).subscribe((data: any) => {
             data.map((d: { properties: { label: string; }; geometry: { coordinates: Coordinates; }; }) => this.locationInput.push({
                 name: d.properties.label,
@@ -71,11 +71,11 @@ export class HomeComponent implements OnInit {
     }
 
     getIPaddress() {
-        this.ipService.getIPAddress().subscribe(data => this.ipAddress = data); 
+        this.ipService.getIPAddress().subscribe(data => this.ipAddress = data);
     }
 
     submit() {
-        
+
         if (this.form.invalid) {
             this.popupService.alert('Please fill in the required fields.');
             this.showFormError = true;
@@ -89,10 +89,17 @@ export class HomeComponent implements OnInit {
             userId: this.userService.getCurrentUserId()
         }
 
-        this.tehTarikDataService.createTehTarik(form).subscribe(data => {
-            console.log(data);
-            this.router.navigate(['map']);
-        });
+        this.tehTarikDataService.createTehTarik(form).subscribe(
+            data => {
+                console.log(data);
+                this.router.navigate(['map'])
+            },
+            err => {
+                if (err.error.statusCode === 400) {
+                    this.popupService.alert('Please click Enter after filling in the region.')
+                }
+            }
+        );
     }
 
     signOut() {
@@ -100,8 +107,8 @@ export class HomeComponent implements OnInit {
     }
 
     filter(coordinates: Coordinates): Selective<Coordinates>[] {
-        const filterValue = coordinates; debugger
+        const filterValue = coordinates;
 
-        return this.options.filter(option => option.value === filterValue); 
+        return this.options.filter(option => option.value === filterValue);
     }
 }

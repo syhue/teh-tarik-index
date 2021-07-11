@@ -52,7 +52,9 @@ export class UserService {
         this.googleAuthService.getAuth().subscribe((auth) => { auth.signIn()
             .then(res => {
                 this.signInSuccessHandler(res);
-                this.router.navigate([routeUrl]);
+                this.ngZone.run(() => {
+                    this.router.navigate([routeUrl]);
+                });
             }, err => this.signInErrorHandler(err));
         });
     }
@@ -62,7 +64,9 @@ export class UserService {
         this.googleAuthService.getAuth().subscribe((auth) => {
             try {
                 auth.signOut();
-                this.router.navigate(['login']);
+                this.ngZone.run(() => {
+                    this.router.navigate(['login']);
+                });
             } catch (e) {
                 console.error(e);
             }
