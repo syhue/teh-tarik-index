@@ -12,6 +12,10 @@ export class NavbarComponent implements OnInit {
             name: "Home",
             route: "home"
         },
+        {
+            name: "Map",
+            route: "map"
+        }
     ]
 
     constructor() { }

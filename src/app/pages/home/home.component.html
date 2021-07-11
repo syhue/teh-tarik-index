@@ -4,20 +4,7 @@
         <span>eh Tarik Index</span>
     </div>
 
-    <div class="description">
-        <p>
-            This website is created for the purpose of calculating the inflation rate within Malaysia by collecting the
-            price of Teh Tarik from
-            different area.
-        </p>
-
-        <p *ngIf="!isLoggedIn()">
-            To ensure the accuracy of data, you are required to sign in with your google account. Apologize the
-            incovienient and thank you for taking your time in contributing the data.
-        </p>
-    </div>
-
-    <div class="form-holder" *ngIf="isLoggedIn()">
+    <div class="form-holder">
         <form #form="ngForm" [class.show-form-error]="showFormError">
             <div class="form-field">
                 <div><span>Enter the amount (RM):</span></div>
@@ -38,20 +25,14 @@
         </form>
     </div>
 
-    <div class="btn-holder" *ngIf="isLoggedIn()">
+    <div class="btn-holder">
         <button class="btn-submit" (click)="submit()">
             <span>Submit</span>
         </button>
     </div>
 
-    <div class="login-section">
-        <cool-google-button color="light" (click)="signIn()" *ngIf="!isLoggedIn()">
-            Login with Google
-        </cool-google-button>
-    </div>
-
     <div class="logout-section">
-        <cool-google-button color="light" (click)="signOut()" *ngIf="isLoggedIn()">
+        <cool-google-button color="light" (click)="signOut()">
             Logout
         </cool-google-button>
     </div>

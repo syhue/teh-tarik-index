@@ -1,6 +1,6 @@
 .nav-container {
 
-    position: absolute;
+    position: relative;
     width: 100%;
 
     img.navbar-brand {
@@ -14,5 +14,9 @@
 
     button.navbar-toggler:focus {
         box-shadow: none !important;
+    }
+
+    a.nav-link.active {
+        font-weight: 560;
     }
 }

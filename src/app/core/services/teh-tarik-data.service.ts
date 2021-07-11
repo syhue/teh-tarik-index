@@ -6,7 +6,7 @@ import { Coordinates } from '../models/coordinates/coordinates';
 import { UserService } from './user-service.service';
 
 class InputForm {
-    price!: number;
+    price!: number | null;
     location!: Coordinates;
     ipAddress!: string;
     userId!: string | null;

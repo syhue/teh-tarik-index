@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
 import * as _ from "lodash";
 import { GoogleAuthService } from 'ng-gapi';
 import { Observable } from 'rxjs';
@@ -18,7 +19,8 @@ export class UserService {
         private googleAuthService: GoogleAuthService,
         private ngZone: NgZone,
         private http: HttpClient,
-        private storageService: StorageService
+        private storageService: StorageService,
+        private router: Router
     ) {
     }
 
@@ -28,7 +30,9 @@ export class UserService {
 
         if (!userId) {
             this.signOut();
+            this.router.navigate(['login']);
             throw new Error("Login is required");
+
         } else {
             return this.storageService.userId;
         }
@@ -44,10 +48,12 @@ export class UserService {
         return this.storageService.accessToken;
     }
 
-    signIn() {
-
-        this.googleAuthService.getAuth().subscribe((auth) => {
-            auth.signIn().then(res => this.signInSuccessHandler(res), err => this.signInErrorHandler(err));
+    signIn(routeUrl: string) {
+        this.googleAuthService.getAuth().subscribe((auth) => { auth.signIn()
+            .then(res => {
+                this.signInSuccessHandler(res);
+                this.router.navigate([routeUrl]);
+            }, err => this.signInErrorHandler(err));
         });
     }
 
@@ -56,6 +62,7 @@ export class UserService {
         this.googleAuthService.getAuth().subscribe((auth) => {
             try {
                 auth.signOut();
+                this.router.navigate(['login']);
             } catch (e) {
                 console.error(e);
             }

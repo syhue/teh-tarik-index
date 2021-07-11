@@ -1,25 +1,17 @@
-import { CoolSocialLoginButtonsModule } from '@angular-cool/social-login-buttons';
+
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { GoogleApiModule, NgGapiClientConfig, NG_GAPI_CONFIG } from "ng-gapi";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { GeoLocationService } from './core/services/geo-location.service';
-import { UserService } from './core/services/user-service.service';
-import { HomeComponent } from './pages/home/home.component';
-
-
+import { ComponentsModule } from './components/components.module';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 let gapiClientConfig: NgGapiClientConfig = {
     client_id: "820064535472-5q1fj0sof1qnvhaj2e4jekgv7bub62g8.apps.googleusercontent.com",
@@ -33,8 +25,8 @@ let gapiClientConfig: NgGapiClientConfig = {
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
-        NavbarComponent,
+        AuthLayoutComponent,
+        AdminLayoutComponent,
     ],
     imports: [
         BrowserModule,
@@ -42,30 +34,14 @@ let gapiClientConfig: NgGapiClientConfig = {
         BrowserAnimationsModule,
         LayoutModule,
         NgbModule,
-        FormsModule,
+        ComponentsModule,
+        RouterModule,
         GoogleApiModule.forRoot({
             provide: NG_GAPI_CONFIG,
             useValue: gapiClientConfig
         }),
-        CoolSocialLoginButtonsModule,
-        AutocompleteLibModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
         HttpClientModule,
-        MatAutocompleteModule,
-        MatInputModule
-    ],
-    providers: [
-        UserService,
-        GeoLocationService
     ],
     bootstrap: [AppComponent],
-
-    exports: [
-        RouterModule
-    ],
-    schemas: [
-        NO_ERRORS_SCHEMA
-    ]
 })
 export class AppModule { }

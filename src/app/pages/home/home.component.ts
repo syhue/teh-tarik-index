@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { GoogleApiService, GoogleAuthService } from 'ng-gapi';
+import { FormControl, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GoogleApiService } from 'ng-gapi';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Coordinates } from '../../core/models/coordinates/coordinates';
@@ -14,7 +14,8 @@ import { UserService } from '../../core/services/user-service.service';
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.scss'],
+    providers: [UserService, GeoLocationService, IpService, TehTarikDataService]
 })
 export class HomeComponent implements OnInit {
 
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
     myControl = new FormControl();
     filteredOptions!: Observable<Selective<Coordinates>[]>;
     showFormError = false;
-    priceTehTarik!: number;
+    priceTehTarik!: number | null;
     place = "";
     locationInput: Selective<Coordinates>[] = [];
     options!: Selective<Coordinates>[];
@@ -35,7 +36,8 @@ export class HomeComponent implements OnInit {
         private gapiService: GoogleApiService,
         private geoLocationService: GeoLocationService,
         private ipService: IpService,
-        private tehTarikDataService: TehTarikDataService
+        private tehTarikDataService: TehTarikDataService,
+        private router: Router,
     ) {}
 
     ngOnInit() {
@@ -47,6 +49,11 @@ export class HomeComponent implements OnInit {
                 startWith(''),
                 map(res => this.filter(res.value))
             );
+    }
+
+    clear() {
+        this.place = "";
+        this.priceTehTarik = null;
     }
 
     getOptions() {
@@ -71,19 +78,10 @@ export class HomeComponent implements OnInit {
             userId: this.userService.getCurrentUserId()
         }
         console.log(form);
-        this.tehTarikDataService.createTehTarik(form).subscribe(data => console.log(data));
-    }
-
-    getCoordinates(coordinates: {x: number, y: number}) {
-        console.log(coordinates);
-    }
-
-    isLoggedIn(): boolean {
-        return this.userService.isUserSignedIn();
-    }
-
-    signIn() {
-        this.userService.signIn();
+        this.tehTarikDataService.createTehTarik(form).subscribe(data => {
+            console.log(data);
+            this.router.navigate(['map']);
+        });
     }
 
     signOut() {
