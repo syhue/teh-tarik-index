@@ -1,2 +1,2 @@
 
-<div class="map" leaflet [leafletOptions]="options"></div>
+<div class="map" leaflet [(leafletOptions)]="options" *ngIf="summitList.length !== 0"></div>

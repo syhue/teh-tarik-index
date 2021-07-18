@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     locationInput: Selective<Coordinates>[] = [];
     options!: Selective<Coordinates>[];
     ipAddress!: string;
-    coordinates!: Coordinates;
+    coordinates!: any;
     errorMsg = DEFAULT_REQUIRED_MSG;
 
     constructor(
@@ -75,7 +75,6 @@ export class HomeComponent implements OnInit {
     }
 
     submit() {
-
         if (this.form.invalid) {
             this.popupService.alert('Please fill in the required fields.');
             this.showFormError = true;
@@ -83,12 +82,13 @@ export class HomeComponent implements OnInit {
         }
 
         const form = {
-            price: this.priceTehTarik,
-            location: this.coordinates,
+            price: this.priceTehTarik?.toString(),
+            locationX: this.coordinates[0].toString(),
+            locationY: this.coordinates[1].toString(),
             ipAddress: this.ipAddress,
             userId: this.userService.getCurrentUserId()
         }
-
+        console.log(form, this.coordinates);
         this.tehTarikDataService.createTehTarik(form).subscribe(
             data => {
                 console.log(data);

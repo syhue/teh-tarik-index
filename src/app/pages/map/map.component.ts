@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { latLng, tileLayer, Icon, Marker } from 'leaflet';
+import { Coordinates } from '../../core/models/coordinates/coordinates';
+import { LocationService } from '../../core/services/location.service';
 
 @Component({
     selector: 'app-map',
@@ -8,47 +10,54 @@ import { latLng, tileLayer, Icon, Marker } from 'leaflet';
 })
 export class MapComponent implements OnInit {
 
+    options!: any;
+    coordinatesList!: Coordinates[];
+    summitList: any[] = [];
 
-    options!: {};
-
-    summit = new Marker([3.11, 101.68], {
-        icon: new Icon({
-            iconSize: [25, 41],
-            iconAnchor: [13, 41],
-            iconUrl: 'leaflet/marker-icon.png',
-            shadowUrl: 'leaflet/marker-shadow.png'
-        })
-    });
-    summit1 = new Marker([1.541689, 103.660102], {
-        icon: new Icon({
-            iconSize: [25, 41],
-            iconAnchor: [13, 41],
-            iconUrl: 'leaflet/marker-icon.png',
-            shadowUrl: 'leaflet/marker-shadow.png'
-        })
-    });
-    summit2 = new Marker([3.142407, 101.710457], {
-        icon: new Icon({
-            iconSize: [25, 41],
-            iconAnchor: [13, 41],
-            iconUrl: 'leaflet/marker-icon.png',
-            shadowUrl: 'leaflet/marker-shadow.png'
-        })
-    });
+    constructor(
+        private locationService: LocationService
+    ) { }
 
     ngOnInit() {
+        this.getLocation();
+    }
 
+    getLocation() {
+        this.locationService.getLocation().subscribe(data => {
+            this.coordinatesList = data;
+            this.generateSummits();
+        });
+    }
+
+    generateSummits() {
+        for (let coordinates of this.coordinatesList) {
+            
+            const summit = new Marker([coordinates.y, coordinates.x], {
+                icon: new Icon({
+                    iconSize: [25, 41],
+                    iconAnchor: [13, 41],
+                    iconUrl: 'leaflet/marker-icon.png',
+                    shadowUrl: 'leaflet/marker-shadow.png'
+                })
+            });
+
+            this.summitList.push(summit);
+        }
+        this.generateMaps();
+    }
+
+    generateMaps() {
+        
         this.options = {
             layers: [ 
                 tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; OpenStreetMap contributors'
-                }),
-                this.summit, this.summit1, this.summit2
+                })
             ],
             zoom: 7,
             center: latLng([3.118725, 101.678834])
         };
 
+        this.options.layers = this.options.layers.concat(this.summitList);
     }
-
 }

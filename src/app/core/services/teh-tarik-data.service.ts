@@ -2,12 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Coordinates } from '../models/coordinates/coordinates';
 import { UserService } from './user-service.service';
 
 class InputForm {
-    price!: number | null;
-    location!: Coordinates;
+    price!: string | undefined;
+    locationX!: string;
+    locationY!: string;
     ipAddress!: string;
     userId!: string | null;
 }
