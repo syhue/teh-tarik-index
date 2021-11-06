@@ -1,11 +1,28 @@
-.nav-container {
+@import "../../core/styles/variables.scss";
 
-    position: relative;
+.nav-container {
+    display: flex;
+    align-items: center;
+    background-color: #f8f5f1;
+    min-height: 100%;
     width: 100%;
+
+    .navbar {
+        margin-inline: auto;
+        width: 50%;
+        padding: 0;
+        min-height: 4rem;
+    }
 
     img.navbar-brand {
         width: 2rem;
         height: auto;
+        padding-top: auto;
+        padding-bottom: auto;
+    }
+
+    .navbar-nav {
+        margin-right: 1rem !important;
     }
 
     .bg-light {
@@ -18,5 +35,35 @@
 
     a.nav-link.active {
         font-weight: 560;
+    }
+
+    .sign-out {
+        cursor: pointer;
+        font-weight: 500;
+    }
+}
+
+@media (max-width: $bp-small-devices) {
+
+    #navbarTogglerDemo03 {
+        padding-left: 10px;
+    }
+
+    .btn-container {
+        min-height: 4rem;
+        display: flex;
+        align-items: center;
+    }
+
+    button {
+        margin-left: 10px;
+    }
+
+    .navbar {
+        width: 100% !important;
+    }
+
+    .sign-out {
+        display: none;
     }
 }

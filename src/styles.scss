@@ -48,16 +48,37 @@ body {
     font-size: smaller;
 }
 
-@media (max-width: $bp-small-devices) and (min-width: $bp-extra-small-devices) {
-    
+.default-container {
+    padding: 3rem 0;
+    max-width: 50vw;
+    margin-inline: auto;
+}
+
+.title-section {
+    font-weight: 700;
+    font-size: 3rem;
+    font-family: "Cedarville Cursive", cursive;
+    color: var(--primary-brown);
+    margin-bottom: 1rem;
+}
+
+@media (max-width: $bp-small-devices) {
+
     html {
         font-size: $base-font-size;
     }
-}
 
-@media (max-width: $bp-extra-small-devices) {
-    
-    html {
-        font-size: $base-font-size * 0.90;
+    .title-section {
+        font-weight: 700;
+        font-size: 3rem;
+        font-family: "Cedarville Cursive", cursive;
+        color: var(--primary-brown);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .default-container {
+        padding: 2rem 1.2rem !important;
+        max-width: none !important;
     }
 }

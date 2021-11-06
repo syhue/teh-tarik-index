@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    apiServer: 'https://app-teh-tarik-index.herokuapp.com/'
+    // apiServer: 'https://app-teh-tarik-index.herokuapp.com/'
+    apiServer: 'http://localhost:3000/'
 };
 
 /*

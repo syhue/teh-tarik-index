@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { latLng, tileLayer, Icon, Marker } from 'leaflet';
+import * as L from 'leaflet';
+import { Icon, Marker } from 'leaflet';
 import { Coordinates } from '../../core/models/coordinates/coordinates';
 import { LocationService } from '../../core/services/location.service';
 
 @Component({
     selector: 'app-map',
     templateUrl: './map.component.html',
-    styleUrls: ['./map.component.scss']
+    styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-
     options!: any;
     coordinatesList!: Coordinates[];
     summitList: any[] = [];
+    map!: any;
 
-    constructor(
-        private locationService: LocationService
-    ) { }
+    constructor(private locationService: LocationService) {}
 
     ngOnInit() {
+        this.map = L.map('map').setView([3.118725, 101.678834], 13);
         this.getLocation();
+        this.generateMaps();
     }
 
     getLocation() {
-        this.locationService.getLocation().subscribe(data => {
+        this.locationService.getLocation().subscribe((data) => {
             this.coordinatesList = data;
             this.generateSummits();
         });
@@ -31,14 +32,13 @@ export class MapComponent implements OnInit {
 
     generateSummits() {
         for (let coordinates of this.coordinatesList) {
-            
-            const summit = new Marker([coordinates.y, coordinates.x], {
+            const summit = new Marker([coordinates.x, coordinates.y], {
                 icon: new Icon({
                     iconSize: [25, 41],
                     iconAnchor: [13, 41],
                     iconUrl: 'leaflet/marker-icon.png',
-                    shadowUrl: 'leaflet/marker-shadow.png'
-                })
+                    shadowUrl: 'leaflet/marker-shadow.png',
+                }),
             });
 
             this.summitList.push(summit);
@@ -47,17 +47,18 @@ export class MapComponent implements OnInit {
     }
 
     generateMaps() {
-        
-        this.options = {
-            layers: [ 
-                tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; OpenStreetMap contributors'
-                })
-            ],
-            zoom: 7,
-            center: latLng([3.118725, 101.678834])
-        };
-
-        this.options.layers = this.options.layers.concat(this.summitList);
+        L.tileLayer(
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+            {
+                attribution:
+                    'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken:
+                    'pk.eyJ1Ijoic29va3lhbiIsImEiOiJja3VhcjVmYjgwam01MzBxcDQwa2tnY3N3In0.pJ4z2UZKsjRuSa21DiyPmA',
+            }
+        ).addTo(this.map);
     }
 }

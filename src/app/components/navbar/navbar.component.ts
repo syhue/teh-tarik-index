@@ -9,13 +9,17 @@ export class NavbarComponent implements OnInit {
 
     menus = [
         {
+            name: "About Us",
+            route: "about-us"
+        },
+        {
             name: "Home",
             route: "home"
         },
         {
             name: "Map",
             route: "map"
-        }
+        },
     ]
 
     constructor() { }

@@ -1,47 +1,83 @@
 @import "../../core/styles/variables.scss";
 
-@media (max-width: $bp-small-devices) {
-    .login-container {
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    padding-top: 15rem;
 
-        padding: 0 1.5rem 0 1.5rem;
-        
+    .title-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 5rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        width: 100%;
+
+        .logo {
+            height: 100%;
+            background-image: url("/assets/logo.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 7rem;
+            height: 7rem;
+            display: block;
+            margin-right: 0.8rem;
+        }
+
+        > span {
+            height: 100%;
+            vertical-align: bottom;
+            font-weight: 700;
+            font-size: 6rem;
+            font-family: "Cedarville Cursive", cursive;
+            color: var(--primary-brown);
+        }
+    }
+
+    .description {
+        font-size: 1.7rem;
+        margin-bottom: 2rem;
+        padding-inline: auto;
+        max-width: 50rem;
+    }
+
+    .login-section {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 8rem;
+        box-shadow: rgba(0, 0, 0, 0.541) 0px 5px 15px;
+    }
+}
+
+@media (max-width: $bp-small-devices) {
+
+    .login-container {
+        padding-top: 10rem;
+
         .title-section {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: center;
-            height: 5rem;
-            margin-bottom: 2rem;
-            width: 100%;
 
             .logo {
-                background-image: url("/assets/logo.png");
-                background-repeat: no-repeat;
-                background-size: contain;
-                width: 2.5rem;
-                height: 2.5rem;
-                display: block;
-                margin-right: 0.2rem;
+                width: 4rem;
+                height: 4rem;
             }
 
             > span {
-                font-weight: 700;
-                font-size: 1.6rem;
-                font-family: "Cedarville Cursive", cursive;
-                color: var(--primary-brown);
+                font-size: 3rem !important;
             }
         }
 
         .description {
-            font-size: 1rem;
+            font-size: 1.7rem;
             margin-bottom: 2rem;
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-inline: auto;
+            max-width: 50rem;
         }
 
         .login-section {
-            display: flex;
-            justify-content: center;
+            margin-top: 3rem;
         }
     }
 }

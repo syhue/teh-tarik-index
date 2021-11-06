@@ -1,22 +1,12 @@
 @import "../../core/styles/variables.scss";
 
-.map {
-    height: 100%;
-    width: 98%;
-    padding: 0;
-    position: fixed !important;
-    display: block;
-    margin-top: 3rem;
+#map {
+    height: 40rem;
 }
 
 @media (max-width: $bp-small-devices) {
 
-    .map {
-        height: 50%;
-        width: 100%;
-        position: fixed !important;
-        display: block;
-        justify-content: center;
-        align-items: center;
+    #map {
+
     }
 }
