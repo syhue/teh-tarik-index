@@ -59,7 +59,11 @@ body {
     font-size: 3rem;
     font-family: "Cedarville Cursive", cursive;
     color: var(--primary-brown);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.mat-option {
+    padding-left: 0 !important;
 }
 
 @media (max-width: $bp-small-devices) {

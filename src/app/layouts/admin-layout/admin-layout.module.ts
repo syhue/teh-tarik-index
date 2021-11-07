@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
@@ -10,7 +11,6 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { HomeComponent } from '../../pages/home/home.component';
 import { MapComponent } from '../../pages/map/map.component';
 import { AdminLayoutRoutes } from './admin-routing.module';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [

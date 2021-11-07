@@ -1,7 +1,12 @@
 @import "../../core/styles/variables.scss";
 
-#map {
+
+.leaflet-container {
     height: 40rem;
+}
+
+#map {
+    height: 100%;
 }
 
 @media (max-width: $bp-small-devices) {

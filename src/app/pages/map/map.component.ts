@@ -10,27 +10,35 @@ import { LocationService } from '../../core/services/location.service';
     styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-    options!: any;
     coordinatesList!: Coordinates[];
     summitList: any[] = [];
     map!: any;
 
-    constructor(private locationService: LocationService) {}
+    constructor(private locationService: LocationService) { }
 
     ngOnInit() {
-        this.map = L.map('map').setView([3.118725, 101.678834], 13);
-        this.getLocation();
+        this.map = L.map('map').setView([3.118725, 101.678834], 7);
         this.generateMaps();
+        this.getLocation();
     }
 
     getLocation() {
         this.locationService.getLocation().subscribe((data) => {
-            this.coordinatesList = data;
-            this.generateSummits();
         });
+        this.coordinatesList = [
+            {
+                x: 3.12,
+                y: 102
+            },
+            {
+                x: 3.11,
+                y: 101.1
+            }
+        ];
+        this.generatePointers();
     }
 
-    generateSummits() {
+    generatePointers() {
         for (let coordinates of this.coordinatesList) {
             const summit = new Marker([coordinates.x, coordinates.y], {
                 icon: new Icon({
@@ -39,11 +47,9 @@ export class MapComponent implements OnInit {
                     iconUrl: 'leaflet/marker-icon.png',
                     shadowUrl: 'leaflet/marker-shadow.png',
                 }),
-            });
-
-            this.summitList.push(summit);
+            }).addTo(this.map);
+            console.log(summit);
         }
-        this.generateMaps();
     }
 
     generateMaps() {
@@ -52,7 +58,7 @@ export class MapComponent implements OnInit {
             {
                 attribution:
                     'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                maxZoom: 18,
+                maxZoom: 20,
                 id: 'mapbox/streets-v11',
                 tileSize: 512,
                 zoomOffset: -1,
