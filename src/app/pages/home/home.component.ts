@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     ipAddress!: string;
     coordinates!: any;
     errorMsg = DEFAULT_REQUIRED_MSG;
+    locationName = "";
 
     constructor(
         private userService: UserService,
@@ -47,7 +48,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.route.fragment.subscribe();
         this.gapiService.onLoad().subscribe();
-        this.getIPaddress();
+        // this.getIPaddress();
         this.filteredOptions = this.myControl.valueChanges
             .pipe(
                 startWith(''),
@@ -70,9 +71,9 @@ export class HomeComponent implements OnInit {
         })
     }
 
-    getIPaddress() {
-        this.ipService.getIPAddress().subscribe(data => this.ipAddress = data);
-    }
+    // getIPaddress() {
+    //     this.ipService.getIPAddress().subscribe(data => this.ipAddress = data, err => console.log(err));
+    // }
 
     submit() {
         if (this.form.invalid) {
@@ -83,20 +84,23 @@ export class HomeComponent implements OnInit {
 
         const form = {
             price: this.priceTehTarik?.toString(),
-            locationX: this.coordinates[0].toString(),
-            locationY: this.coordinates[1].toString(),
-            ipAddress: this.ipAddress,
+            coordinateX: this.coordinates[1].toString(),
+            coordinateY: this.coordinates[0].toString(),
+            // ipAddress: this.ipAddress,
+            locationName: this.locationName,
             userId: this.userService.getCurrentUserId()
         }
-        console.log(form, this.coordinates);
         this.tehTarikDataService.createTehTarik(form).subscribe(
             data => {
-                console.log(data);
-                this.router.navigate(['map'])
+                this.popupService.alert("Submit Successfully").then(() => this.router.navigate(['map']))
             },
             err => {
                 if (err.error.statusCode === 400) {
-                    this.popupService.alert('Please click Enter after filling in the region.')
+                    this.popupService.alert(err.error.message);
+                }
+                if (err.error.statusCode === 401) {
+                    this.popupService.alert('Please login to submit');
+                    this.router.navigate(['login']);
                 }
             }
         );
@@ -110,5 +114,10 @@ export class HomeComponent implements OnInit {
         const filterValue = coordinates;
 
         return this.options.filter(option => option.value === filterValue);
+    }
+
+    saveOption(item: {name: string, value: Coordinates}) {
+        this.coordinates = item.value;
+        this.locationName = item.name;
     }
 }

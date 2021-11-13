@@ -1,7 +1,7 @@
 export class GoogleUserFilterModel {
-    It!: string;
-    Ve!: string;
-    gJ!: string;
-    dS!: string;
-    hU!: string;
+    Tt!: string;
+    Se!: string;
+    SJ!: string;
+    NS!: string;
+    wU!: string;
 }

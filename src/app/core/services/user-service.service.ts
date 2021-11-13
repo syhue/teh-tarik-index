@@ -9,7 +9,9 @@ import { environment } from '../../../environments/environment';
 import { GoogleUserFilter } from '../models/google-user/google-user-filter';
 import { StorageService } from './storage.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class UserService {
 
     route = environment.apiServer;
@@ -25,7 +27,7 @@ export class UserService {
     }
 
     getCurrentUserId(): string | null {
-        
+
         let userId = this.storageService.userId;
 
         if (!userId) {
@@ -49,10 +51,13 @@ export class UserService {
     }
 
     signIn(routeUrl: string) {
-        this.googleAuthService.getAuth().subscribe((auth) => { auth.signIn()
-            .then(res => {
+        this.googleAuthService.getAuth().subscribe((auth) => {
+            console.log('auth', auth);
+            auth.signIn().then(res => {
                 this.signInSuccessHandler(res);
-                this.ngZone.run(() => {
+                console.log('res', res);
+                this.ngZone.run(test => {
+                    console.log(test);
                     this.router.navigate([routeUrl]);
                 });
             }, err => this.signInErrorHandler(err));
@@ -80,8 +85,9 @@ export class UserService {
 
     private signInSuccessHandler(res: any) {
         this.ngZone.run(() => {
-            this.savedUser = new GoogleUserFilter(res.Ys);
-            
+            console.log(res.it);
+            this.savedUser = new GoogleUserFilter(res.it);
+            console.log(this.savedUser);
             this.storageService.setAccessToken(res.getAuthResponse().access_token);
             this.googleStoreData().subscribe(data => {
                 console.log(data);
@@ -101,6 +107,7 @@ export class UserService {
             email: this.savedUser.email
         }
         return this.http.get<any>(this.route + 'google-auth', { params: params }).pipe(map(data => {
+            console.log(data);
             this.storageService.setUserId(data.id);
         }))
     }

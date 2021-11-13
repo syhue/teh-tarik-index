@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { Icon, Marker } from 'leaflet';
-import { Coordinates } from '../../core/models/coordinates/coordinates';
+import { TehTarikDetails } from 'src/app/core/services/teh-tarik-data.service';
 import { LocationService } from '../../core/services/location.service';
 
 @Component({
@@ -10,46 +10,56 @@ import { LocationService } from '../../core/services/location.service';
     styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-    coordinatesList!: Coordinates[];
+    tehTarikDetails!: TehTarikDetails[];
     summitList: any[] = [];
     map!: any;
+    group!: any;
 
     constructor(private locationService: LocationService) { }
 
     ngOnInit() {
-        this.map = L.map('map').setView([3.118725, 101.678834], 7);
+        this.map = L.map('map').setView([3.118725, 101.678834], 14);
         this.generateMaps();
-        this.getLocation();
+        this.getTehTarikDetails();
     }
 
-    getLocation() {
-        this.locationService.getLocation().subscribe((data) => {
+    getTehTarikDetails() {
+        this.locationService.getTehTarikDetails().subscribe((data) => {
+            this.tehTarikDetails = data;
+            this.generateManyPointers();
         });
-        this.coordinatesList = [
-            {
-                x: 3.12,
-                y: 102
-            },
-            {
-                x: 3.11,
-                y: 101.1
-            }
-        ];
-        this.generatePointers();
     }
 
-    generatePointers() {
-        for (let coordinates of this.coordinatesList) {
-            const summit = new Marker([coordinates.x, coordinates.y], {
-                icon: new Icon({
-                    iconSize: [25, 41],
-                    iconAnchor: [13, 41],
-                    iconUrl: 'leaflet/marker-icon.png',
-                    shadowUrl: 'leaflet/marker-shadow.png',
-                }),
-            }).addTo(this.map);
-            console.log(summit);
+    generateManyPointers() {
+        let pointers = [];
+
+        if (this.tehTarikDetails) {
+            for (let item of this.tehTarikDetails) {
+                pointers.push(this.generatePointer(item));
+            }
         }
+        this.group = L.featureGroup(pointers);
+        this.map.fitBounds(this.group.getBounds().pad(0.5));
+    }
+
+    generatePointer(item: TehTarikDetails) {
+        const msg = `Location Name: ${item.locationName}
+        Latitude: ${item.coordinateX}
+        Longitude: ${item.coordinateY}
+        Teh Tarik Price: RM${item.price}`;
+
+        const pointer = new Marker([parseFloat(item.coordinateX), parseFloat(item.coordinateY)], {
+            icon: new Icon({
+                iconSize: [25, 41],
+                iconAnchor: [13, 41],
+                iconUrl: 'leaflet/marker-icon.png',
+                shadowUrl: 'leaflet/marker-shadow.png',
+            }),
+        })
+            .bindTooltip(msg, { opacity: 0.95 })
+            .openTooltip()
+            .addTo(this.map);
+        return pointer;
     }
 
     generateMaps() {

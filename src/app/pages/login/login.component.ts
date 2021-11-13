@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.gapiService.onLoad().subscribe();
+        this.gapiService.onLoad().subscribe(res => console.log(res));
     }
 
     isLoggedIn(): boolean {

@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { UserService } from './user-service.service';
 
-class InputForm {
+export class TehTarikDetails {
     price!: string | undefined;
-    locationX!: string;
-    locationY!: string;
-    ipAddress!: string;
+    coordinateX!: string;
+    coordinateY!: string;
+    // ipAddress!: string;
+    locationName!: string;
     userId!: string | null;
 }
 
@@ -24,7 +25,7 @@ export class TehTarikDataService {
         private userService: UserService
     ) { }
 
-    createTehTarik(body: InputForm): Observable<InputForm> {
+    createTehTarik(body: TehTarikDetails): Observable<TehTarikDetails> {
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -32,6 +33,6 @@ export class TehTarikDataService {
         })
 
         const options = { headers: headers };
-        return this.http.post<InputForm>(this.route, body, options);
+        return this.http.post<TehTarikDetails>(this.route, body, options);
     }
 }

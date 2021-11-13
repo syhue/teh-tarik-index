@@ -13,6 +13,6 @@ export class IpService {
     ) { }
 
     getIPAddress(): Observable<string> {
-        return this.http.get<{ ip: string }>('http://api.ipify.org/?format=json').pipe(map(d => d.ip));
+        return this.http.get<{ ip: string }>('https://jsonip.com').pipe(map(d => d.ip));
     }
 }
