@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Description1, Description2 } from '../../../assets/contant';
+import { Description1, Description2 } from 'src/assets/contant';
 
 @Component({
     selector: 'app-about-us',

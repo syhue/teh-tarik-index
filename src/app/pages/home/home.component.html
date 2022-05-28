@@ -14,8 +14,7 @@
 
             <div class="form-field col-lg-6">
                 <div><span>Enter the region: </span></div>
-                <input type="text" placeholder="TBS, Bandar Tasik Selatan" aria-label="Number" matInput [matAutocomplete]="auto"
-                    name="place" [(ngModel)]="place" (keyup)="getOptions()" required>
+                <input type="text" placeholder="TBS, Bandar Tasik Selatan" aria-label="Number" matInput [matAutocomplete]="auto" name="place" [(ngModel)]="place" (keyup)="getOptions()" required>
                 <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let item of locationInput" [value]="item.name" (onSelectionChange)="saveOption(item)">
                         {{ item.name }}

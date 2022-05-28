@@ -7,12 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GoogleApiModule, NgGapiClientConfig, NG_GAPI_CONFIG } from "ng-gapi";
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ComponentsModule } from './components/components.module';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppComponent } from 'src/app/app.component';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { AdminLayoutComponent } from 'src/app/layouts/admin-layout/admin-layout.component';
+import { AuthLayoutComponent } from 'src/app/layouts/auth-layout/auth-layout.component';
+import { AboutUsComponent } from 'src/app/pages/about-us/about-us.component';
 
 let gapiClientConfig: NgGapiClientConfig = {
     client_id: "820064535472-bibojjttg43951e5d07q42pu2pbcoogd.apps.googleusercontent.com",

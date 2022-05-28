@@ -90,7 +90,6 @@ export class UserService {
             console.log(this.savedUser);
             this.storageService.setAccessToken(res.getAuthResponse().access_token);
             this.googleStoreData().subscribe(data => {
-                console.log(data);
                 this.googleGetUserId().subscribe()
             });
         });
@@ -107,7 +106,6 @@ export class UserService {
             email: this.savedUser.email
         }
         return this.http.get<any>(this.route + 'google-auth', { params: params }).pipe(map(data => {
-            console.log(data);
             this.storageService.setUserId(data.id);
         }))
     }

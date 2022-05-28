@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { UserService } from './user-service.service';
+import { UserService } from 'src/app/core/services/user-service.service';
+import { environment } from 'src/environments/environment';
 
 export class TehTarikDetails {
     price!: string | undefined;

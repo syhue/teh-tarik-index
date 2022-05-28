@@ -7,9 +7,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from '../../pages/home/home.component';
-import { MapComponent } from '../../pages/map/map.component';
-import { AdminLayoutRoutes } from './admin-routing.module';
+import { AdminLayoutRoutes } from 'src/app/layouts/admin-layout/admin-routing.module';
+import { HomeComponent } from 'src/app/pages/home/home.component';
+import { MapComponent } from 'src/app/pages/map/map.component';
 
 @NgModule({
     declarations: [

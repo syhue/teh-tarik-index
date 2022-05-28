@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
-import { AboutUsComponent } from "../../pages/about-us/about-us.component";
-import { HomeComponent } from "../../pages/home/home.component";
-import { MapComponent } from "../../pages/map/map.component";
+import { AboutUsComponent } from "src/app/pages/about-us/about-us.component";
+import { HomeComponent } from "src/app/pages/home/home.component";
+import { MapComponent } from "src/app/pages/map/map.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home', component: HomeComponent, data: { title: 'Home' } },
