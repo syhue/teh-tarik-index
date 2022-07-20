@@ -4,7 +4,7 @@ import { AdminLayoutComponent } from "src/app/layouts/admin-layout/admin-layout.
 import { AuthLayoutComponent } from "src/app/layouts/auth-layout/auth-layout.component";
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
         path: '', component: AdminLayoutComponent,
         children:
@@ -17,7 +17,7 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: 'login'
+        redirectTo: 'home'
     }
 ]
 
